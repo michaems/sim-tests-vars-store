@@ -6,7 +6,7 @@
 // Testing with Integer type
 TEST(SimulatorVariableTests, testVariableWithIntegerValue)
 {
-    std::cout<<"Creating a Varible and setting its value as int"<<std::endl;
+    std::cout<<"Creating a Variable and setting its value as int"<<std::endl;
     
     int expValue = 25;
 
@@ -28,7 +28,7 @@ TEST(SimulatorVariableTests, testVariableWithIntegerValue)
 // Testing with Floating point type
 TEST(SimulatorVariableTests, testVariableWithFloatValue)
 {
-    std::cout<<"Creating a Varible and setting its value as float."<<std::endl;
+    std::cout<<"Creating a Variable and setting its value as float."<<std::endl;
     
     float expValue = 50.5;
     
@@ -50,8 +50,7 @@ TEST(SimulatorVariableTests, testVariableWithFloatValue)
 // Testing with Boolean type
 TEST(SimulatorVariableTests, testVariableWithBooleanValue)
 {
-    std::cout<<"Creating a Varible and setting its \
-        value as boolean."<<std::endl;
+    std::cout<<"Creating a Variable and setting its value as boolean."<<std::endl;
     
     bool expValue = false;
     
@@ -83,7 +82,7 @@ TEST(SimulatorVariableTests, testVariableWithBooleanValue)
 
 TEST(SimulatorVariableTests, testVerifyTheValueIsInvalidated)
 {
-    std::cout<<"Creating a Varible and makeing sure it \
+    std::cout<<"Creating a Variable and makeing sure it \
         has been invalidated after second set"<<std::endl;
     
     int expValue = 100;
