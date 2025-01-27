@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "simulator-tests-variables.h"
 
-Variable::Variable(std::string name) 
+Variable::Variable(std::string name)
 {
     m_name = name;
     m_type = SupTypes::Unsupported;
@@ -11,7 +11,6 @@ Variable::Variable(std::string name)
 template<typename T>
 void Variable::setValue(T value) 
 {
-
     if constexpr (std::is_floating_point_v<T>)
     {
         m_value.f_value = static_cast<float>(value);
@@ -37,8 +36,6 @@ void Variable::setValue(T value)
         m_isValid = false;
         m_type = SupTypes::Unsupported;
     }
-
- 
 }
 
 template<typename T>

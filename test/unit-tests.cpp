@@ -83,7 +83,7 @@ TEST(SimulatorVariableTests, testVariableWithBooleanValue)
 TEST(SimulatorVariableTests, testVerifyTheValueIsInvalidated)
 {
     std::cout<<"Creating a Variable and makeing sure it \
-        has been invalidated after second set"<<std::endl;
+        has been invalidated after second set."<<std::endl;
     
     int expValue = 100;
     
@@ -105,7 +105,7 @@ TEST(SimulatorVariableTests, testVerifyTheValueIsInvalidated)
 
 }
 
-TEST(SimulatorVariableStoreTests, testVerifyTheStoreConstainsCorrectAmountOfVariables)
+TEST(SimulatorVariableStoreTests, testVerifyTheStoreContainsCorrectAmountOfVariables)
 {
     // Create a VariableStore with 100 integers and make sure the data is saved.
     auto vstore = VariableStore();
@@ -120,7 +120,7 @@ TEST(SimulatorVariableStoreTests, testVerifyTheStoreConstainsCorrectAmountOfVari
     EXPECT_EQ(100, vstore.getVariablesCount());
 }
 
-TEST(SimulatorVariableStoreTests, testVerifyTheStoreResturnsCorrectVariableWithGet)
+TEST(SimulatorVariableStoreTests, testVerifyTheStoreReturnsCorrectVariableWithGet)
 {
     // Create a VariableStore with 100 integers.
     auto vstore = VariableStore();
@@ -145,7 +145,7 @@ TEST(SimulatorVariableStoreTests, testVerifyTheStoreResturnsCorrectVariableWithG
     EXPECT_EQ(82, vs->getValue<int>());
 }
 
-TEST(SimulatorVariableStoreTests, testVerifyTheStoreResturnsCorrectVariablesWithRegex)
+TEST(SimulatorVariableStoreTests, testVerifyTheStoreReturnsCorrectVariablesWithRegex)
 {
     // Create a VariableStore with 100 integers.
     auto vstore = VariableStore();
