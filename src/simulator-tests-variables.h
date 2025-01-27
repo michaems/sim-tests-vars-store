@@ -7,29 +7,16 @@
 #include <vector>
 #include <regex>
 #include <type_traits>
+#include <variant>
 
-// Supported types
-enum class SupTypes 
-{
-    Unsupported = 0,
-    TypeBoolean,
-    TypeInteger,
-    TypeFloat
-};
-
-typedef union 
-{
-    bool b_value;
-    int  i_value;
-    float f_value;
-} union_var;
-
+using VariableVariant = std::variant<int, bool, float>;
 
 class Variable 
 {
 public:
     Variable() = delete;
     Variable(std::string name);
+    ~Variable();
 
     template<typename T>
     void setValue(T value);
@@ -37,29 +24,25 @@ public:
     template<typename T>
     T getValue() const;
 
-    SupTypes getType();
-
-    bool isValid();
-
     std::string getName() const;
 private:
-    SupTypes m_type;
     std::string m_name;
-    union_var m_value;
-    bool m_isValid;
+    VariableVariant m_value;
 };
 
 typedef std::shared_ptr<Variable> VariableSharedPtr;
+
 
 class VariableStore
 {
 public:
     VariableStore();
+    ~VariableStore();
 
     VariableSharedPtr createVariable(std::string name);
 
     VariableSharedPtr get(const std::string& name);
-    std::vector<VariableSharedPtr> find(std::regex& regexp);
+    std::vector<VariableSharedPtr> find(const std::regex& regexp);
 
     int getVariablesCount();
 

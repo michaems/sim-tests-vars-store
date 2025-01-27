@@ -10,7 +10,7 @@ int main()
     {
         std::string name = "var_num_" + std::to_string(i);
         auto vv = vstore.createVariable(name);
-        vv->setValue<int>(i);
+        vv->setValue<float>(i*0.9);
     }
 
     std::regex reg1("[a-z]+_[a-z]+_1.");
@@ -19,6 +19,6 @@ int main()
 
     for (const VariableSharedPtr vsp : vs)
     {
-        std::cout << "found and returned: " << vsp->getName() << " value = " << vsp->getValue<int>() << std::endl;
+        std::cout << "found and returned: " << vsp->getName() << " value = " << vsp->getValue<float>() << std::endl;
     }
 }

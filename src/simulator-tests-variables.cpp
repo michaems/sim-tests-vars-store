@@ -2,61 +2,35 @@
 #include <algorithm>
 #include "simulator-tests-variables.h"
 
-Variable::Variable(std::string name)
+Variable::Variable(std::string name) : m_name(name)
 {
-    m_name = name;
-    m_type = SupTypes::Unsupported;
+    
+}
+
+Variable::~Variable()
+{
+
 }
 
 template<typename T>
 void Variable::setValue(T value) 
 {
-    if constexpr (std::is_floating_point_v<T>)
-    {
-        m_value.f_value = static_cast<float>(value);
-        m_type = SupTypes::TypeFloat;
-        m_isValid = true;
-    }
-    else if constexpr (std::is_integral_v<T> && !std::is_same_v<T, bool>)
-    {
-        m_value.i_value = static_cast<int>(value);
-        m_type = SupTypes::TypeInteger;
-        m_isValid = true;
-    }
-    else if constexpr (std::is_integral_v<T> && std::is_same_v<T, bool>)
-    {
-        m_value.i_value = static_cast<bool>(value);
-        m_type = SupTypes::TypeBoolean;
-        m_isValid = true;
-    }
-    else
-    {
-        // Shall we invalidate the variable, if it has been set with 
-        // valid value before?
-        m_isValid = false;
-        m_type = SupTypes::Unsupported;
-    }
+    // Compile time error occurs,
+    // if wrong type is provided.
+    m_value = value;
 }
 
 template<typename T>
 T Variable::getValue() const 
 {
-    if constexpr (std::is_floating_point_v<T>)
+    if (std::holds_alternative<T>(m_value))
     {
-        return m_value.f_value;
+        return std::get<T>(m_value);
     }
-    else if constexpr (std::is_integral_v<T> && !std::is_same_v<T, bool>)
+    else
     {
-        return m_value.i_value; 
-    }
-    else if constexpr (std::is_integral_v<T> && std::is_same_v<T, bool>)
-    {
-        return m_value.b_value;
-    }
-    else 
-    {
-        return nullptr;
-    }
+        // What to return if wrong type is provided.
+    } 
 }
 
 std::string Variable::getName() const
@@ -64,17 +38,12 @@ std::string Variable::getName() const
     return m_name;    
 }
 
-SupTypes Variable::getType()
+VariableStore::VariableStore()
 {
-    return m_type;
+
 }
 
-bool Variable::isValid()
-{
-    return m_isValid;
-}
-
-VariableStore::VariableStore() 
+VariableStore::~VariableStore()
 {
 
 }
@@ -88,10 +57,8 @@ VariableSharedPtr VariableStore::createVariable(std::string name)
 
 VariableSharedPtr VariableStore::get(const std::string& name)
 {
-    VariableSharedPtr vv = nullptr;
+     VariableSharedPtr vv;
 
-    // Shall we find by an exact name or by substring. 
-    // Right now it is by an exact name.
     auto it = std::find_if(m_variables.begin(), m_variables.end(), 
                            [&name](VariableSharedPtr vsp) {
                                return vsp->getName() == name;
@@ -106,7 +73,7 @@ VariableSharedPtr VariableStore::get(const std::string& name)
 }
 
 
-std::vector<VariableSharedPtr> VariableStore::find(std::regex& regexp)
+std::vector<VariableSharedPtr> VariableStore::find(const std::regex& regexp)
 {
     std::vector<VariableSharedPtr> vvsp;
     

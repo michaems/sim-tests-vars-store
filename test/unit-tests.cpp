@@ -19,10 +19,6 @@ TEST(SimulatorVariableTests, testVariableWithIntegerValue)
 
     // 2. Name is correctly set.
     EXPECT_EQ("var1_int", v1.getName());
-
-    //3. Type is correctly set
-    EXPECT_EQ(SupTypes::TypeInteger, v1.getType());
-
 }
 
 // Testing with Floating point type
@@ -41,9 +37,6 @@ TEST(SimulatorVariableTests, testVariableWithFloatValue)
 
     // 2. Name is correctly set.
     EXPECT_EQ("var2_float", v2.getName());
-
-    //3. Type is correctly set
-    EXPECT_EQ(SupTypes::TypeFloat, v2.getType());
 }
 
 
@@ -64,9 +57,6 @@ TEST(SimulatorVariableTests, testVariableWithBooleanValue)
     // 2. Name is correctly set.
     EXPECT_EQ("var3_boolean", v3.getName());
 
-    //3. Type is correctly set
-    EXPECT_EQ(SupTypes::TypeBoolean, v3.getType());
-
     // The same verification with "true" value
     expValue = true;
     v3.setValue<bool>(expValue);
@@ -74,36 +64,8 @@ TEST(SimulatorVariableTests, testVariableWithBooleanValue)
     // Verify that:
     // 1. Value is correctly set
     EXPECT_EQ(expValue, v3.getValue<bool>());
-
-    // 2. Type is correctly set
-    EXPECT_EQ(SupTypes::TypeBoolean, v3.getType());
-
 }
 
-TEST(SimulatorVariableTests, testVerifyTheValueIsInvalidated)
-{
-    std::cout<<"Creating a Variable and makeing sure it \
-        has been invalidated after second set."<<std::endl;
-    
-    int expValue = 100;
-    
-    Variable v4("var4_valid");
-    v4.setValue<int>(expValue);
-    
-    // Verify that:
-    // 1. Value is correctly set
-    EXPECT_EQ(expValue, v4.getValue<int>());
-
-    // 2. Variable is valid
-    EXPECT_EQ(true, v4.isValid());
-
-    // 3. Tring to set an unsupported type
-    v4.setValue<std::string>("test_string");
-
-    // 4. Verify isValid() function returnes false.
-    EXPECT_EQ(false, v4.isValid());
-
-}
 
 TEST(SimulatorVariableStoreTests, testVerifyTheStoreContainsCorrectAmountOfVariables)
 {

@@ -19,5 +19,6 @@ if (NOT GoogleTest_POPULATED)
     add_subdirectory( ${googletest_SOURCE_DIR} ${googletest_build_DIR})
 endif()
 
-add_subdirectory(src)
 add_subdirectory(test)
+
+add_subdirectory(src)
