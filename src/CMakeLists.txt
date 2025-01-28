@@ -11,7 +11,7 @@ add_executable (
 add_library (
     ${LIB_NAME}
     STATIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/simulator-tests-variables.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/simulator-tests-variable.cpp
 )
 
 target_include_directories(${LIB_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
