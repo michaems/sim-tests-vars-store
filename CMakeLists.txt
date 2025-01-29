@@ -4,20 +4,16 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-#add GTEST for unit tests
-include(FetchContent)
+Include(FetchContent)
 
 FetchContent_Declare(
-    GoogleTest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG v1.15.1
+  Catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG        v3.8.0
 )
-FetchContent_GetProperties(GoogleTest)
-if (NOT GoogleTest_POPULATED)
 
-    FetchContent_Populate(GoogleTest)
-    add_subdirectory( ${googletest_SOURCE_DIR} ${googletest_build_DIR})
-endif()
+FetchContent_MakeAvailable(Catch2)
+list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
 
 add_subdirectory(test)
 
