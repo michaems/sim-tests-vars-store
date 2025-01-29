@@ -3,7 +3,7 @@
 #include "simulator-tests-variables-store.cpp"
 
 
-TEST_CASE("Test Variable With Integer Value", "VARIABLE|INT")
+TEST_CASE("Test Variable With Integer Value")
 {
     int expValue = 25;
 
@@ -11,21 +11,21 @@ TEST_CASE("Test Variable With Integer Value", "VARIABLE|INT")
     
     // Verify that:
     // 1. Value is correctly set
-    CHECK(expValue == v1.getValue<int>());
+    REQUIRE(expValue == v1.getValue<int>());
 
     // 2. Name is correctly set.
-    CHECK("var1_int" == v1.getName());
+    REQUIRE("var1_int" == v1.getName());
 
     // 3. Description is correctly set.
-    CHECK("desc for int" == v1.getDesc());
+    REQUIRE("desc for int" == v1.getDesc());
 
     // 4. Change the value and verify it is correct.
     v1.setValue<int>(35);
-    CHECK(35 == v1.getValue<int>());
+    REQUIRE(35 == v1.getValue<int>());
 }
 
 // Testing with Floating point type
-TEST_CASE("Test Variable With Double value", "VARIABLE|DOUBLE")
+TEST_CASE("Test Variable With Double value")
 {
     double expValue = 50.5;
     
@@ -34,21 +34,21 @@ TEST_CASE("Test Variable With Double value", "VARIABLE|DOUBLE")
     
     // Verify that:
     // 1. Value is correctly set
-    CHECK(expValue == v2.getValue<double>());
+    REQUIRE(expValue == v2.getValue<double>());
 
     // 2. Name is correctly set.
-    CHECK("var2_double" == v2.getName());
+    REQUIRE("var2_double" == v2.getName());
 
     // 3. Description is correctly set.
-    CHECK("desc for double" == v2.getDesc());
+    REQUIRE("desc for double" == v2.getDesc());
 
     // 4. Change the value and verify it is correct.
     v2.setValue<double>(75.4);
-    CHECK(75.4 == v2.getValue<double>());
+    REQUIRE(75.4 == v2.getValue<double>());
 }
 
 // Testing with Boolean type
-TEST_CASE("Test Variable With Boolean value", "VARIABLE|BOOL")
+TEST_CASE("Test Variable With Boolean value")
 {
     bool expValue = true;
     
@@ -56,13 +56,13 @@ TEST_CASE("Test Variable With Boolean value", "VARIABLE|BOOL")
     
     // Verify that:
     // 1. Value is correctly set
-    CHECK(expValue == v3.getValue<bool>());
+    REQUIRE(expValue == v3.getValue<bool>());
 
     // 2. Name is correctly set.
-    CHECK("var3_boolean" == v3.getName());
+    REQUIRE("var3_boolean" == v3.getName());
 
     // 3. Description is correctly set.
-    CHECK("desc for bool" == v3.getDesc());
+    REQUIRE("desc for bool" == v3.getDesc());
 
     // The same verification with "true" value
     expValue = true;
@@ -70,7 +70,7 @@ TEST_CASE("Test Variable With Boolean value", "VARIABLE|BOOL")
 
     // Verify that:
     // 4. Value is correctly set
-    CHECK(expValue == v3.getValue<bool>());
+    REQUIRE(expValue == v3.getValue<bool>());
 }
 
 // Testing VariableStore
@@ -85,7 +85,7 @@ TEST_CASE("Verify the Store contains correct amount of Variables")
     }
 
     // 1. Verify the store hase 100 Variables
-    CHECK(100 == vstore.getVariablesCount());
+    REQUIRE(100 == vstore.getVariablesCount());
 }
 
 TEST_CASE("Verify the Store returns correct Variable with Get")
@@ -100,20 +100,20 @@ TEST_CASE("Verify the Store returns correct Variable with Get")
 
     // 1. Verify the store finds by name and returns a Varible shared pointer correctly
     VariableSharedPtr vs = vstore.get("var_num_50");
-    CHECK_FALSE(vs == nullptr);
+    REQUIRE_FALSE(vs == nullptr);
 
-    CHECK("var_num_50" == vs->getName());
-    CHECK(50 == vs->getValue<int>());
+    REQUIRE("var_num_50" == vs->getName());
+    REQUIRE(50 == vs->getValue<int>());
 
     vs = vstore.get("var_num_82");
-    CHECK_FALSE(vs == nullptr);
+    REQUIRE_FALSE(vs == nullptr);
 
-    CHECK("var_num_82" == vs->getName());
-    CHECK(82 == vs->getValue<int>());
+    REQUIRE("var_num_82" == vs->getName());
+    REQUIRE(82 == vs->getValue<int>());
 
     // 2. If given Varaible not found, then nullpointer returned.
     vs = vstore.get("var_num_190");
-    CHECK_FALSE(vs != nullptr);
+    REQUIRE_FALSE(vs != nullptr);
 }
 
 
@@ -132,10 +132,10 @@ TEST_CASE("Verify the Store returns correct Variables With Regex")
     std::vector<VariableSharedPtr> vs = vstore.find(regex1);
 
     // 1. vs vector should contain 10 Variables having 2 in their name (from 20 to 29)
-    CHECK(10 == vs.size());
+    REQUIRE(10 == vs.size());
 
     // 2. Checking some rundom Variable in vs vector.
     VariableSharedPtr vsp22 = vs.at(2);
-    CHECK("var_num_22" == vsp22->getName());
-    CHECK(22 == vsp22->getValue<int>());
+    REQUIRE("var_num_22" == vsp22->getName());
+    REQUIRE(22 == vsp22->getValue<int>());
 }

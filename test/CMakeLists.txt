@@ -14,7 +14,7 @@ target_link_libraries (
     Catch2::Catch2WithMain
 )
 
-add_custom_command(TARGET ${UNIT_TEST_EXE} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${UNIT_TEST_EXE}> ${PROJECT_BINARY_DIR}/${UNIT_TEST_EXE}
-    COMMENT "The target ${UNIT_TEST_EXE} copied to ${PROJECT_BINARY_DIR}/${UNIT_TEST_EXE}"
-)
+#add_custom_command(TARGET ${UNIT_TEST_EXE} POST_BUILD
+#    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${UNIT_TEST_EXE}> ${PROJECT_BINARY_DIR}/${UNIT_TEST_EXE}
+#    COMMENT "The target ${UNIT_TEST_EXE} copied to ${PROJECT_BINARY_DIR}/${UNIT_TEST_EXE}"
+#)
